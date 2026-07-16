@@ -85,12 +85,12 @@
   /* ── hero: foto a sangre + marquesina ── */
   .hero { position: relative; min-height: 100dvh; overflow: hidden; }
   .hero-bg { position: absolute; inset: 0; }
-  .hero-bg img { filter: brightness(0.78) saturate(1.05); }
+  .hero-bg img { filter: brightness(0.62) saturate(1.05); object-position: 72% 28%; }
   .hero-bg::after {
     content: ""; position: absolute; inset: 0;
     background:
-      linear-gradient(to top, var(--noche) 4%, rgba(22,19,14,0.35) 42%, rgba(22,19,14,0.55) 100%),
-      linear-gradient(to right, rgba(22,19,14,0.85), transparent 62%);
+      linear-gradient(to top, var(--noche) 12%, rgba(22,19,14,0.55) 48%, rgba(22,19,14,0.35) 100%),
+      linear-gradient(to right, rgba(22,19,14,0.9) 8%, transparent 70%);
   }
   .hero-inner {
     position: relative; z-index: 2; min-height: 100dvh;
@@ -170,12 +170,14 @@
 
   /* helado */
   .helado { background: var(--noche-2); }
-  .helado-wrap { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: clamp(2rem,5vw,4.5rem); align-items: center; }
+  .helado-inner { max-width: 1280px; margin: 0 auto; }
+  .helado-head { max-width: 40ch; margin-bottom: clamp(2.5rem,5vw,3.5rem); }
+  .helado-main { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: clamp(2rem,5vw,4.5rem); align-items: center; }
   .helado-foto { aspect-ratio: 3/4; border-radius: 4px; }
-  .helado-flight { margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .helado-flight .foto { aspect-ratio: 4/5; border-radius: 4px; }
-  .dos-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem,4vw,3rem); margin-top: 2rem; }
-  .dos-col h3 { font-family: var(--display); font-size: 1.6rem; color: var(--salvia); margin-bottom: 0.6rem; letter-spacing: 0.02em; }
+  .helado-listas { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem,4vw,3rem); }
+  .helado-listas h3 { font-family: var(--display); font-size: 1.6rem; color: var(--salvia); margin-bottom: 0.6rem; letter-spacing: 0.02em; }
+  .helado-galeria { margin-top: clamp(2rem,4vw,3rem); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.8rem,2vw,1.4rem); }
+  .helado-galeria .foto { aspect-ratio: 16/11; border-radius: 4px; }
 
   /* vinos */
   .vinos-grid { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: clamp(2rem,5vw,4rem); align-items: start; }
@@ -187,8 +189,18 @@
   /* visita */
   .visita { text-align: center; }
   .visita .titulo { margin: 0 auto; max-width: 20ch; }
-  .visita-datos { margin-top: 2.4rem; display: flex; justify-content: center; flex-wrap: wrap; gap: clamp(1.5rem,5vw,4rem); font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--crema-suave); }
-  .visita-datos b { display: block; font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.02em; text-transform: none; color: var(--salvia); margin-top: 0.3rem; }
+  .visita-grid { margin-top: 2.8rem; display: grid; grid-template-columns: auto auto; gap: clamp(2rem,6vw,5rem); justify-content: center; align-items: start; text-align: left; }
+  .horario h3, .visita-info span { font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--salvia); }
+  .horario h3 { margin-bottom: 0.8rem; }
+  .horario ul { list-style: none; }
+  .horario li { display: flex; justify-content: space-between; gap: 1.6rem; padding: 0.32rem 0; font-size: 0.95rem; color: var(--crema-suave); }
+  .horario li span { min-width: 6.5em; }
+  .horario li b { font-weight: 500; color: var(--crema); white-space: nowrap; }
+  .visita-info { display: grid; gap: 1.6rem; }
+  .visita-info span { display: block; margin-bottom: 0.25rem; }
+  .visita-info b { font-family: var(--display); font-size: 1.5rem; font-weight: 400; letter-spacing: 0.02em; color: var(--crema); }
+  .visita-info a { color: var(--crema); text-decoration: none; }
+  .visita-info a:hover { color: var(--salvia); }
   .btn {
     display: inline-block; margin-top: 3rem; font-family: var(--sans); font-weight: 600;
     font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase;
@@ -205,7 +217,9 @@
   .precio-nota { text-align: center; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--crema-suave); padding: 0 1.2rem 3rem; }
 
   @media (max-width: 860px) {
-    .botana-grid, .charc-grid, .helado-wrap, .vinos-grid, .dos-col, .cocteles-cols { grid-template-columns: 1fr; }
+    .botana-grid, .charc-grid, .helado-main, .helado-listas, .vinos-grid, .cocteles-cols { grid-template-columns: 1fr; }
+    .visita-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+    .horario li { min-width: 15em; }
     .vinos-foto { position: static; }
     .n-links a:not(:last-child) { display: none; }
     .fila .desc { max-width: none; }
@@ -234,13 +248,7 @@
     <div class="hero-datos rev visto" style="--d:180ms">
       <span>Helado y vino</span>
       <span>Talavera</span>
-      <span>Mié a dom · 7:30 pm</span>
-    </div>
-    <div class="marquesina rev visto" style="--d:260ms" aria-hidden="true">
-      <div class="marq-track">
-        <span>vino natural</span><b>·</b><span>negroni lemi</span><b>·</b><span>botana</span><b>·</b><span>charcutería</span><b>·</b><span>vermut de la casa</span><b>·</b><span>helado artesanal</span><b>·</b>
-        <span>vino natural</span><b>·</b><span>negroni lemi</span><b>·</b><span>botana</span><b>·</b><span>charcutería</span><b>·</b><span>vermut de la casa</span><b>·</b><span>helado artesanal</span><b>·</b>
-      </div>
+      <span>Abierto todos los días</span>
     </div>
   </div>
 </header>
@@ -284,14 +292,17 @@
 </section>
 
 <section class="helado" id="helado" style="max-width:none">
-  <div class="helado-wrap">
-    <figure class="helado-foto foto rev"><img src="img/copa-lemi.jpg?v=6" alt="Copa de helado con galleta de barquillo marcada LEMI" loading="lazy" /></figure>
-    <div>
+  <div class="helado-inner">
+    <div class="helado-head">
       <p class="kicker rev">El dulce</p>
       <h2 class="titulo rev" style="--d:80ms">El helado <span class="ac">va en copa</span></h2>
       <p class="intro rev" style="--d:140ms">Artesanal, de sabores que cambian. Pídelo por bola o llévate la degustación de cuatro con una copa de vino al lado.</p>
-      <div class="dos-col">
-        <div class="rev" style="--d:180ms">
+    </div>
+
+    <div class="helado-main">
+      <figure class="helado-foto foto rev"><img src="img/copa-lemi.jpg?v=6" alt="Copa de helado con galleta de barquillo marcada LEMI" loading="lazy" /></figure>
+      <div class="helado-listas">
+        <div class="rev" style="--d:120ms">
           <h3>Helado</h3>
           <div class="lista" style="margin-top:0">
             <div class="fila"><span class="nom">Un sabor</span><span class="lider"></span><span class="precio">$80</span></div>
@@ -299,7 +310,7 @@
             <div class="fila"><span class="nom">Degustación 4 sabores</span><span class="lider"></span><span class="precio">$160</span></div>
           </div>
         </div>
-        <div class="rev" style="--d:240ms">
+        <div class="rev" style="--d:200ms">
           <h3>Café</h3>
           <div class="lista" style="margin-top:0">
             <div class="fila"><span class="nom">Espresso</span><span class="lider"></span><span class="precio">$40</span></div>
@@ -310,10 +321,11 @@
           </div>
         </div>
       </div>
-      <div class="helado-flight">
-        <figure class="foto rev" style="--d:200ms"><img src="img/flight.jpg?v=6" alt="Bandeja con cuatro copas de helado de distintos sabores" loading="lazy" /></figure>
-        <figure class="foto rev" style="--d:280ms"><img src="img/degustacion.jpg?v=6" alt="Degustación de helados con copa de vino blanco" loading="lazy" /></figure>
-      </div>
+    </div>
+
+    <div class="helado-galeria">
+      <figure class="foto rev" style="--d:140ms"><img src="img/flight.jpg?v=6" alt="Bandeja con cuatro copas de helado de distintos sabores" loading="lazy" /></figure>
+      <figure class="foto rev" style="--d:220ms"><img src="img/degustacion.jpg?v=6" alt="Degustación de helados con copa de vino blanco" loading="lazy" /></figure>
     </div>
   </div>
 </section>
@@ -374,12 +386,25 @@
 <section class="visita" id="visita">
   <p class="kicker rev">Visítanos</p>
   <h2 class="titulo rev" style="--d:60ms">Pasa por una copa, quédate <span class="ac">por el helado</span></h2>
-  <div class="visita-datos rev" style="--d:120ms">
-    <div>Horario<b>Mié a dom, 7:30 pm</b></div>
-    <div>Dónde<b>Talavera</b></div>
-    <div>Redes<b>@lemiheladoyvino</b></div>
+  <div class="visita-grid rev" style="--d:120ms">
+    <div class="horario">
+      <h3>Horario</h3>
+      <ul>
+        <li><span>Lunes</span><b>3:00 – 9:00 pm</b></li>
+        <li><span>Martes</span><b>3:00 – 9:00 pm</b></li>
+        <li><span>Miércoles</span><b>3:00 – 11:00 pm</b></li>
+        <li><span>Jueves</span><b>3:00 – 11:00 pm</b></li>
+        <li><span>Viernes</span><b>3:00 – 11:30 pm</b></li>
+        <li><span>Sábado</span><b>4:00 – 11:30 pm</b></li>
+        <li><span>Domingo</span><b>3:00 – 9:00 pm</b></li>
+      </ul>
+    </div>
+    <div class="visita-info">
+      <div><span>Dónde</span><b>Talavera</b></div>
+      <div><span>Redes</span><b><a href="https://instagram.com/lemiheladoyvino" target="_blank" rel="noopener">@lemiheladoyvino</a></b></div>
+    </div>
   </div>
-  <a class="btn rev" style="--d:200ms" href="https://instagram.com/lemiheladoyvino" target="_blank" rel="noopener">Síguenos en Instagram</a>
+  <a class="btn rev" style="--d:200ms" href="https://lemiheladoyvino-glitch.github.io/LemiMEnu-QR/" target="_blank" rel="noopener">Nuestra carta</a>
 </section>
 
 <footer>
