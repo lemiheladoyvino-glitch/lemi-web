@@ -3,24 +3,34 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>LEMI — helado y vino, de noche</title>
-<meta name="description" content="LEMI. Helado y vino en Talavera. Vino natural, latas, quesos y helado artesanal. Abrimos de noche." />
+<title>LEMI — helado y vino</title>
+<meta name="description" content="LEMI. Helado y vino en Talavera. Vino natural por copa, negronis, botana, charcutería y helado artesanal. Abrimos de noche." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fredoka:wght@500;600&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <style>
+  @font-face {
+    font-family: "Genty";
+    src: url("fonts/Genty.otf") format("opentype"),
+         url("fonts/Genty.ttf") format("truetype");
+    font-weight: 400;
+    font-display: swap;
+  }
+
   :root {
     --noche: #16130e;
     --noche-2: #1e1a13;
+    --noche-3: #241f16;
     --crema: #ece3d0;
-    --crema-suave: rgba(236, 227, 208, 0.62);
+    --crema-suave: rgba(236, 227, 208, 0.6);
     --salvia: #a8b08f;
-    --ambar: #c99a4e;
-    --serif: "Cormorant Garamond", serif;
+    --salvia-2: #8b9670;
+    --ambar: #d0a15a;
+    --vino: #7a3b3b;
+    --display: "Genty", "Archivo", sans-serif;
     --sans: "Archivo", sans-serif;
-    --logo: "Fredoka", sans-serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,373 +43,343 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-
   ::selection { background: var(--salvia); color: var(--noche); }
-
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-  /* aparición suave */
+  /* grano de película, fijo */
+  .grano {
+    position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
   @media (prefers-reduced-motion: no-preference) {
-    .rev {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
-      transition-delay: var(--d, 0ms);
-    }
+    .rev { opacity: 0; transform: translateY(26px);
+      transition: opacity 800ms cubic-bezier(0.16,1,0.3,1), transform 800ms cubic-bezier(0.16,1,0.3,1);
+      transition-delay: var(--d, 0ms); }
     .rev.visto { opacity: 1; transform: translateY(0); }
     .foto { overflow: hidden; }
-    .foto img { transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1); }
-    .foto:hover img { transform: scale(1.03); }
+    .foto img { transition: transform 900ms cubic-bezier(0.16,1,0.3,1); }
+    .foto:hover img { transform: scale(1.04); }
+    .marq-track { animation: marq 34s linear infinite; }
   }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  html { scroll-behavior: smooth; }
 
   /* ── nav ── */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 40;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.1rem clamp(1.2rem, 4vw, 3.5rem);
-    background: linear-gradient(rgba(22, 19, 14, 0.85), transparent);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem clamp(1.2rem, 4vw, 3.5rem);
+    background: linear-gradient(rgba(22,19,14,0.9), transparent);
   }
-  .n-logo {
-    display: block;
-    line-height: 0;
-  }
-  .n-logo img {
-    height: 30px;
-    width: auto;
-  }
-  .n-links { display: flex; gap: 2rem; }
+  .n-logo { display: block; line-height: 0; }
+  .n-logo img { height: 30px; width: auto; }
+  .n-links { display: flex; gap: 2rem; align-items: center; }
   .n-links a {
-    color: var(--crema-suave);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    color: var(--crema-suave); text-decoration: none; font-size: 0.82rem;
+    font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
     transition: color 200ms ease-out;
   }
   .n-links a:hover { color: var(--crema); }
 
-  /* ── hero ── */
-  .hero {
-    min-height: 100dvh;
-    display: grid;
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  /* ── hero: foto a sangre + marquesina ── */
+  .hero { position: relative; min-height: 100dvh; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; }
+  .hero-bg img { filter: brightness(0.78) saturate(1.05); }
+  .hero-bg::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(to top, var(--noche) 4%, rgba(22,19,14,0.35) 42%, rgba(22,19,14,0.55) 100%),
+      linear-gradient(to right, rgba(22,19,14,0.85), transparent 62%);
   }
-  .hero-texto {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: clamp(5rem, 12vh, 8rem) clamp(1.5rem, 5vw, 5rem) clamp(3rem, 8vh, 5rem);
+  .hero-inner {
+    position: relative; z-index: 2; min-height: 100dvh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: clamp(6rem,14vh,9rem) clamp(1.2rem,4vw,3.5rem) 0;
   }
-  .hero-texto .marca {
-    line-height: 0;
+  .hero-wordmark { width: clamp(240px, 40vw, 480px); height: auto; margin-bottom: 1.6rem; }
+  .hero-lema {
+    font-family: var(--display);
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    line-height: 0.98; color: var(--crema);
+    max-width: 15ch; letter-spacing: 0.01em;
   }
-  .hero-texto .marca img {
-    width: clamp(230px, 34vw, 400px);
-    height: auto;
-  }
-  .hero-texto .lema {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(1.7rem, 3.5vw, 2.7rem);
-    color: var(--salvia);
-    margin-top: 1.4rem;
-    line-height: 1.25;
-    max-width: 18ch;
-  }
-  .hero-texto .datos {
-    margin-top: 3rem;
-    font-size: 0.85rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+  .hero-lema .ac { color: var(--salvia); }
+  .hero-datos {
+    margin-top: 1.8rem; display: flex; gap: 1.4rem; flex-wrap: wrap;
+    font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--crema-suave);
-    display: grid;
-    gap: 0.5rem;
   }
-  .hero-foto { position: relative; min-height: 60vh; }
-  .hero-foto::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, var(--noche), transparent 30%);
+  .hero-datos span { display: flex; align-items: center; gap: 1.4rem; }
+  .hero-datos span::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--ambar); }
+  .hero-datos span:last-child::after { display: none; }
+
+  /* marquesina Genty */
+  .marquesina {
+    position: relative; z-index: 2; margin-top: clamp(2rem, 5vh, 3.5rem);
+    border-top: 1px solid rgba(236,227,208,0.16);
+    border-bottom: 1px solid rgba(236,227,208,0.16);
+    overflow: hidden; white-space: nowrap; padding: 0.7rem 0;
   }
+  .marq-track { display: inline-block; }
+  .marq-track span {
+    font-family: var(--display); font-size: 1.5rem; color: var(--crema);
+    padding: 0 1.3rem; letter-spacing: 0.02em;
+  }
+  .marq-track b { color: var(--ambar); font-weight: 400; }
+  @keyframes marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   /* ── secciones ── */
-  section { padding: clamp(4rem, 11vh, 8rem) clamp(1.2rem, 4vw, 3.5rem); }
+  section { padding: clamp(4rem,11vh,7.5rem) clamp(1.2rem,4vw,3.5rem); max-width: 1280px; margin: 0 auto; }
+  .kicker {
+    font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--salvia); margin-bottom: 1rem;
+  }
   .titulo {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(2.4rem, 6vw, 4.2rem);
-    line-height: 1.08;
-    max-width: 16ch;
+    font-family: var(--display);
+    font-size: clamp(2.6rem, 7vw, 5.2rem);
+    line-height: 0.98; letter-spacing: 0.01em; max-width: 15ch;
   }
-  .titulo i { color: var(--salvia); }
-  .intro {
-    margin-top: 1.2rem;
-    max-width: 44ch;
-    color: var(--crema-suave);
-    font-size: 1.02rem;
-  }
+  .titulo .ac { color: var(--salvia); }
+  .intro { margin-top: 1.2rem; max-width: 46ch; color: var(--crema-suave); font-size: 1.02rem; }
 
-  /* la mesa: tríptico escalonado */
-  .mesa-grid {
-    margin-top: 3.5rem;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: clamp(1rem, 2.5vw, 2rem);
-    align-items: start;
+  /* menú: fila con líder de puntos */
+  .lista { margin-top: 2.6rem; }
+  .fila {
+    display: grid; grid-template-columns: auto 1fr auto; align-items: baseline;
+    gap: 0.6rem; padding: 1rem 0; border-bottom: 1px solid rgba(236,227,208,0.12);
   }
-  .pieza { position: relative; }
-  .pieza .foto { border-radius: 4px; }
-  .pieza figcaption {
-    margin-top: 0.9rem;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 1.25rem;
-    color: var(--crema-suave);
-  }
-  .pieza figcaption b {
-    display: block;
-    font-family: var(--sans);
-    font-style: normal;
-    font-weight: 500;
-    font-size: 0.82rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--crema);
-    margin-bottom: 0.15rem;
-  }
-  .pieza-1 { grid-column: 1 / 5; }
-  .pieza-1 .foto { aspect-ratio: 3 / 4; }
-  .pieza-2 { grid-column: 5 / 9; margin-top: 4.5rem; }
-  .pieza-2 .foto { aspect-ratio: 3 / 4; }
-  .pieza-3 { grid-column: 9 / 13; margin-top: 1.5rem; }
-  .pieza-3 .foto { aspect-ratio: 3 / 4; }
+  .fila .nom { font-size: 1.18rem; font-weight: 500; color: var(--crema); }
+  .fila .desc { display: block; font-size: 0.86rem; font-weight: 300; color: var(--crema-suave); margin-top: 0.2rem; max-width: 52ch; }
+  .fila .lider { border-bottom: 1px dotted rgba(236,227,208,0.28); transform: translateY(-5px); }
+  .fila .precio { font-family: var(--sans); font-weight: 500; color: var(--ambar); font-size: 1rem; white-space: nowrap; }
 
-  /* helado: foto grande + texto */
-  .helado {
-    background: var(--noche-2);
-    display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-    gap: clamp(2rem, 5vw, 5rem);
-    align-items: center;
-  }
-  .helado .foto { aspect-ratio: 3 / 4; border-radius: 4px; }
-  .helado-texto .titulo { max-width: 14ch; }
-  .helado-flight {
-    margin-top: 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(1rem, 2.5vw, 2rem);
-  }
-  .helado-flight .foto { aspect-ratio: 4 / 5; border-radius: 4px; }
+  /* botana: texto + tira de fotos */
+  .botana-grid { display: grid; grid-template-columns: minmax(0,6fr) minmax(0,6fr); gap: clamp(2rem,5vw,4rem); align-items: start; }
+  .tira { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.8rem,2vw,1.4rem); margin-top: 3rem; }
+  .tira .foto { border-radius: 4px; }
+  .tira .foto:nth-child(1) { grid-column: 1 / -1; aspect-ratio: 16/10; }
+  .tira .foto:nth-child(2) { aspect-ratio: 3/4; }
+  .tira .foto:nth-child(3) { aspect-ratio: 3/4; }
 
-  /* vinos: banda editorial */
-  .vinos-grid {
-    margin-top: 3.5rem;
-    display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: clamp(1rem, 2.5vw, 2rem);
-    align-items: end;
-  }
-  .vinos-grid .foto { border-radius: 4px; }
-  .vinos-grid .v-1 { aspect-ratio: 4 / 5; }
-  .vinos-grid .v-2 { aspect-ratio: 3 / 4; margin-bottom: 3.5rem; }
-  .lista-vinos {
-    margin-top: 2.5rem;
-    max-width: 640px;
-  }
-  .lista-vinos li {
-    list-style: none;
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 0.9rem 0;
-    border-bottom: 1px solid rgba(236, 227, 208, 0.14);
-    font-family: var(--serif);
-    font-size: 1.35rem;
-  }
-  .lista-vinos li:first-child { border-top: 1px solid rgba(236, 227, 208, 0.14); }
-  .lista-vinos .tipo { color: var(--crema); }
-  .lista-vinos .raya { flex: 1; }
-  .lista-vinos .nota {
-    font-family: var(--sans);
-    font-size: 0.85rem;
-    color: var(--crema-suave);
-    letter-spacing: 0.04em;
-  }
+  /* charcutería: foto grande + tablas */
+  .charc { background: var(--noche-2); border-radius: 6px; padding: clamp(1.6rem,4vw,3rem); margin-top: 3.5rem; }
+  .charc-grid { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: clamp(1.6rem,4vw,3.2rem); align-items: stretch; }
+  .charc-foto { border-radius: 4px; min-height: 100%; }
+  .charc-foto .foto { height: 100%; border-radius: 4px; }
+
+  /* helado */
+  .helado { background: var(--noche-2); }
+  .helado-wrap { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: clamp(2rem,5vw,4.5rem); align-items: center; }
+  .helado-foto { aspect-ratio: 3/4; border-radius: 4px; }
+  .helado-flight { margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .helado-flight .foto { aspect-ratio: 4/5; border-radius: 4px; }
+  .dos-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem,4vw,3rem); margin-top: 2rem; }
+  .dos-col h3 { font-family: var(--display); font-size: 1.6rem; color: var(--salvia); margin-bottom: 0.6rem; letter-spacing: 0.02em; }
+
+  /* vinos */
+  .vinos-grid { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: clamp(2rem,5vw,4rem); align-items: start; }
+  .vinos-foto { aspect-ratio: 4/5; border-radius: 4px; position: sticky; top: 90px; }
+  .nota-botella { margin-top: 1.6rem; padding: 1.2rem 1.4rem; border-left: 2px solid var(--ambar); background: var(--noche-2); border-radius: 0 4px 4px 0; font-size: 0.95rem; color: var(--crema-suave); }
+  .nota-botella b { color: var(--crema); font-weight: 500; display: block; margin-bottom: 0.2rem; font-family: var(--display); font-size: 1.2rem; letter-spacing: 0.02em; }
+  .cocteles-cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem,4vw,3rem); margin-top: 2.5rem; }
 
   /* visita */
-  .visita {
-    text-align: center;
-    padding-bottom: clamp(5rem, 12vh, 9rem);
-  }
+  .visita { text-align: center; }
   .visita .titulo { margin: 0 auto; max-width: 20ch; }
-  .visita-datos {
-    margin-top: 2.5rem;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: clamp(1.5rem, 5vw, 4rem);
-    font-size: 0.85rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--crema-suave);
-  }
-  .visita-datos b {
-    display: block;
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.3rem;
-    letter-spacing: 0;
-    text-transform: none;
-    color: var(--salvia);
-  }
+  .visita-datos { margin-top: 2.4rem; display: flex; justify-content: center; flex-wrap: wrap; gap: clamp(1.5rem,5vw,4rem); font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--crema-suave); }
+  .visita-datos b { display: block; font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.02em; text-transform: none; color: var(--salvia); margin-top: 0.3rem; }
   .btn {
-    display: inline-block;
-    margin-top: 3rem;
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 0.9rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--noche);
-    background: var(--crema);
-    text-decoration: none;
-    padding: 1rem 2.4rem;
-    border-radius: 999px;
+    display: inline-block; margin-top: 3rem; font-family: var(--sans); font-weight: 600;
+    font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--noche); background: var(--crema); text-decoration: none;
+    padding: 1rem 2.4rem; border-radius: 999px;
     transition: transform 150ms ease-out, background 150ms ease-out;
   }
   .btn:hover { background: var(--salvia); }
   .btn:active { transform: scale(0.97); }
 
-  footer {
-    border-top: 1px solid rgba(236, 227, 208, 0.14);
-    padding: 1.6rem clamp(1.2rem, 4vw, 3.5rem);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--crema-suave);
-  }
+  footer { border-top: 1px solid rgba(236,227,208,0.14); padding: 1.6rem clamp(1.2rem,4vw,3.5rem); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.6rem; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--crema-suave); }
   footer a { color: var(--salvia); text-decoration: none; }
   footer a:hover { color: var(--crema); }
+  .precio-nota { text-align: center; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--crema-suave); padding: 0 1.2rem 3rem; }
 
-  @media (max-width: 820px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-foto { order: -1; min-height: 46vh; }
-    .hero-foto::after { background: linear-gradient(to top, var(--noche), transparent 40%); }
-    .hero-texto { padding-top: 1.5rem; }
-    .mesa-grid { grid-template-columns: 1fr; }
-    .pieza { grid-column: 1 / -1 !important; margin-top: 0 !important; }
-    .helado { grid-template-columns: 1fr; }
-    .vinos-grid { grid-template-columns: 1fr; }
-    .vinos-grid .v-2 { margin-bottom: 0; }
+  @media (max-width: 860px) {
+    .botana-grid, .charc-grid, .helado-wrap, .vinos-grid, .dos-col, .cocteles-cols { grid-template-columns: 1fr; }
+    .vinos-foto { position: static; }
     .n-links a:not(:last-child) { display: none; }
+    .fila .desc { max-width: none; }
   }
 </style>
 </head>
 <body>
 
+<div class="grano" aria-hidden="true"></div>
+
 <nav>
   <a class="n-logo" href="#" aria-label="LEMI, helado y vino"><img src="img/wordmark-crema.png" alt="LEMI" /></a>
   <div class="n-links">
-    <a href="#mesa">La mesa</a>
-    <a href="#helado">El helado</a>
-    <a href="#vinos">Los vinos</a>
-    <a href="https://instagram.com/lemiheladoyvino" target="_blank" rel="noopener">Instagram</a>
+    <a href="#botana">Botana</a>
+    <a href="#helado">Helado</a>
+    <a href="#vinos">Vinos y cócteles</a>
+    <a href="#visita">Dónde</a>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="hero-texto">
-    <h1 class="marca rev visto"><img src="img/wordmark-crema.png" alt="LEMI, helado y vino" /></h1>
-    <p class="lema rev visto" style="--d: 120ms">abre de noche, cierra con helado</p>
-    <div class="datos rev visto" style="--d: 240ms">
-      <span>Helado y vino · Talavera</span>
-      <span>Miércoles a domingo · desde las 7:30 pm</span>
+  <div class="hero-bg"><img src="img/letrero.jpg" alt="Letrero iluminado de LEMI entre hojas, de noche" fetchpriority="high" /></div>
+  <div class="hero-inner">
+    <img class="hero-wordmark rev visto" src="img/wordmark-crema.png" alt="LEMI, helado y vino" />
+    <h1 class="hero-lema rev visto" style="--d:80ms">Abre de noche,<br /><span class="ac">cierra con helado.</span></h1>
+    <div class="hero-datos rev visto" style="--d:180ms">
+      <span>Helado y vino</span>
+      <span>Talavera</span>
+      <span>Mié a dom · 7:30 pm</span>
     </div>
-  </div>
-  <div class="hero-foto">
-    <img src="img/letrero.jpg" alt="Letrero iluminado de LEMI entre hojas, de noche" fetchpriority="high" />
+    <div class="marquesina rev visto" style="--d:260ms" aria-hidden="true">
+      <div class="marq-track">
+        <span>vino natural</span><b>·</b><span>negroni lemi</span><b>·</b><span>botana</span><b>·</b><span>charcutería</span><b>·</b><span>vermut de la casa</span><b>·</b><span>helado artesanal</span><b>·</b>
+        <span>vino natural</span><b>·</b><span>negroni lemi</span><b>·</b><span>botana</span><b>·</b><span>charcutería</span><b>·</b><span>vermut de la casa</span><b>·</b><span>helado artesanal</span><b>·</b>
+      </div>
+    </div>
   </div>
 </header>
 
-<section id="mesa">
-  <h2 class="titulo rev">La mesa se llena <i>de cosas buenas</i></h2>
-  <p class="intro rev" style="--d: 100ms">Latas del mar, quesos y algo frito para acompañar la copa. Cocina chica, producto grande.</p>
+<section id="botana">
+  <p class="kicker rev">Para picar</p>
+  <div class="botana-grid">
+    <div>
+      <h2 class="titulo rev">La barra se llena <span class="ac">de botana</span></h2>
+      <p class="intro rev" style="--d:100ms">Latas del mar, aceitunas y algo con qué acompañar la copa. Producto bueno, poco alarde.</p>
+      <div class="lista rev" style="--d:160ms">
+        <div class="fila"><span class="nom">Aceitunas rellenas<span class="desc">porción de 100 g</span></span><span class="lider"></span><span class="precio">$65</span></div>
+        <div class="fila"><span class="nom">Pistaches<span class="desc">porción de 25 g</span></span><span class="lider"></span><span class="precio">$55</span></div>
+        <div class="fila"><span class="nom">Chips de la casa<span class="desc">porción de 80 g</span></span><span class="lider"></span><span class="precio">$65</span></div>
+        <div class="fila"><span class="nom">Chips con mejillones<span class="desc">papas fritas coronadas con mejillones en escabeche</span></span><span class="lider"></span><span class="precio">$190</span></div>
+        <div class="fila"><span class="nom">Sardinas<span class="desc">lata abierta con pan artesanal, limón eureka y mayonesa de mejillón</span></span><span class="lider"></span><span class="precio">$250</span></div>
+      </div>
+    </div>
+    <div class="tira rev" style="--d:120ms">
+      <figure class="foto"><img src="img/latas.jpg" alt="Lata de sardinas con pan artesanal, limón y mayonesa de mejillón" loading="lazy" /></figure>
+      <figure class="foto"><img src="img/chips.jpg" alt="Chips con mejillones, jamón y queso" loading="lazy" /></figure>
+      <figure class="foto"><img src="img/quesos.jpg" alt="Tabla de quesos con aceitunas y copa de vino" loading="lazy" /></figure>
+    </div>
+  </div>
 
-  <div class="mesa-grid">
-    <figure class="pieza pieza-1 rev">
-      <div class="foto"><img src="img/latas.jpg" alt="Lata de sardinas abierta con pan artesanal, limón eureka y mayonesa de mejillón" loading="lazy" /></div>
-      <figcaption><b>Latas</b>sardinas, pan y mayonesa de mejillón</figcaption>
-    </figure>
-    <figure class="pieza pieza-2 rev" style="--d: 120ms">
-      <div class="foto"><img src="img/chips.jpg" alt="Papas fritas con jamón, mejillones y queso rallado" loading="lazy" /></div>
-      <figcaption><b>Para picar</b>papas, jamón y mejillón escabechado</figcaption>
-    </figure>
-    <figure class="pieza pieza-3 rev" style="--d: 240ms">
-      <div class="foto"><img src="img/quesos.jpg" alt="Tabla de quesos con aceitunas y copa de vino blanco" loading="lazy" /></div>
-      <figcaption><b>Quesos</b>tabla de la casa con aceitunas</figcaption>
-    </figure>
+  <div class="charc rev" style="--d:120ms">
+    <div class="charc-grid">
+      <div class="charc-foto"><figure class="foto"><img src="img/quesos.jpg" alt="Tabla de charcutería con quesos, aceitunas y vino" loading="lazy" /></figure></div>
+      <div>
+        <p class="kicker">Charcutería</p>
+        <p class="intro" style="margin-top:0">Tablas acompañadas de pan artesanal, dips de la casa y mermeladas o miel, incluidos.</p>
+        <div class="lista" style="margin-top:1.8rem">
+          <div class="fila"><span class="nom">Quesos<span class="desc">selección de quesos maduros y suaves, nacionales e importados</span></span><span class="lider"></span><span class="precio">$220</span></div>
+          <div class="fila"><span class="nom">Embutidos<span class="desc">jamones y embutidos curados de la región</span></span><span class="lider"></span><span class="precio">$240</span></div>
+          <div class="fila"><span class="nom">Tigelle<span class="desc">stracciatella fresca con jamón serrano, salami, lomo embuchado y lomo canadiense</span></span><span class="lider"></span><span class="precio">$320</span></div>
+          <div class="fila"><span class="nom">Mixta<span class="desc">combinación de quesos y embutidos para compartir</span></span><span class="lider"></span><span class="precio">$360</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="helado" id="helado">
-  <figure class="foto rev">
-    <img src="img/copa-lemi.jpg" alt="Copa metálica con helado y galleta de barquillo marcada LEMI" loading="lazy" />
-  </figure>
-  <div class="helado-texto">
-    <h2 class="titulo rev">El helado <i>va en copa</i></h2>
-    <p class="intro rev" style="--d: 100ms">Artesanal, de sabores que cambian cada semana. Pide la degustación: cuatro copitas y un vino para acompañar.</p>
-    <div class="helado-flight">
-      <figure class="foto rev" style="--d: 160ms">
-        <img src="img/flight.jpg" alt="Bandeja con cuatro copas de helado de distintos sabores" loading="lazy" />
-      </figure>
-      <figure class="foto rev" style="--d: 260ms">
-        <img src="img/degustacion.jpg" alt="Degustación de helados con copa de vino blanco" loading="lazy" />
-      </figure>
+<section class="helado" id="helado" style="max-width:none">
+  <div class="helado-wrap">
+    <figure class="helado-foto foto rev"><img src="img/copa-lemi.jpg" alt="Copa de helado con galleta de barquillo marcada LEMI" loading="lazy" /></figure>
+    <div>
+      <p class="kicker rev">El dulce</p>
+      <h2 class="titulo rev" style="--d:80ms">El helado <span class="ac">va en copa</span></h2>
+      <p class="intro rev" style="--d:140ms">Artesanal, de sabores que cambian. Pídelo por bola o llévate la degustación de cuatro con una copa de vino al lado.</p>
+      <div class="dos-col">
+        <div class="rev" style="--d:180ms">
+          <h3>Helado</h3>
+          <div class="lista" style="margin-top:0">
+            <div class="fila"><span class="nom">Un sabor</span><span class="lider"></span><span class="precio">$80</span></div>
+            <div class="fila"><span class="nom">Dos sabores</span><span class="lider"></span><span class="precio">$110</span></div>
+            <div class="fila"><span class="nom">Degustación 4 sabores</span><span class="lider"></span><span class="precio">$160</span></div>
+          </div>
+        </div>
+        <div class="rev" style="--d:240ms">
+          <h3>Café</h3>
+          <div class="lista" style="margin-top:0">
+            <div class="fila"><span class="nom">Espresso</span><span class="lider"></span><span class="precio">$40</span></div>
+            <div class="fila"><span class="nom">Americano</span><span class="lider"></span><span class="precio">$45</span></div>
+            <div class="fila"><span class="nom">Latte</span><span class="lider"></span><span class="precio">$60</span></div>
+            <div class="fila"><span class="nom">Chai latte</span><span class="lider"></span><span class="precio">$65</span></div>
+            <div class="fila"><span class="nom">Matcha latte</span><span class="lider"></span><span class="precio">$65</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="helado-flight">
+        <figure class="foto rev" style="--d:200ms"><img src="img/flight.jpg" alt="Bandeja con cuatro copas de helado de distintos sabores" loading="lazy" /></figure>
+        <figure class="foto rev" style="--d:280ms"><img src="img/degustacion.jpg" alt="Degustación de helados con copa de vino blanco" loading="lazy" /></figure>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="vinos">
-  <h2 class="titulo rev">Los vinos, <i>por copa</i></h2>
-  <p class="intro rev" style="--d: 100ms">Rotación corta de vino natural. Lo que está abierto hoy quizá mañana no; pregunta en barra.</p>
+  <p class="kicker rev">La copa</p>
+  <h2 class="titulo rev" style="--d:60ms">Vino natural <span class="ac">y cócteles</span></h2>
+  <p class="intro rev" style="--d:120ms">Por copa, por lata o por botella. Y una carta de negronis, spritz y floats de la casa.</p>
 
-  <div class="vinos-grid">
-    <figure class="pieza rev">
-      <div class="foto v-1"><img src="img/vinos.jpg" alt="Tres copas de vino tinto, rosado y naranja sobre la barra" loading="lazy" /></div>
-      <figcaption><b>La barra</b>tinto, rosado y naranja, siempre fríos</figcaption>
-    </figure>
-    <div>
-      <ul class="lista-vinos rev" style="--d: 120ms">
-        <li><span class="tipo">Tinto ligero</span><span class="raya"></span><span class="nota">garnacha, fresco</span></li>
-        <li><span class="tipo">Rosado</span><span class="raya"></span><span class="nota">de trago largo</span></li>
-        <li><span class="tipo">Naranja</span><span class="raya"></span><span class="nota">piel, flor, funk</span></li>
-        <li><span class="tipo">Vermut</span><span class="raya"></span><span class="nota">con hielo y naranja</span></li>
-      </ul>
+  <div class="vinos-grid" style="margin-top:3rem">
+    <div class="rev">
+      <figure class="vinos-foto foto"><img src="img/vinos.jpg" alt="Copas de vino tinto, rosado y naranja sobre la barra" loading="lazy" /></figure>
+      <div class="nota-botella">
+        <b>¿Buscas botella?</b>
+        Nuestra selección cambia constantemente. Con gusto te ayudamos a elegir la ideal; pregunta por las etiquetas disponibles.
+      </div>
+    </div>
+    <div class="rev" style="--d:120ms">
+      <div class="lista" style="margin-top:0">
+        <div class="fila"><span class="nom">Vino blanco</span><span class="lider"></span><span class="precio">$110</span></div>
+        <div class="fila"><span class="nom">Vino rosa</span><span class="lider"></span><span class="precio">$110</span></div>
+        <div class="fila"><span class="nom">Vino tinto</span><span class="lider"></span><span class="precio">$110</span></div>
+        <div class="fila"><span class="nom">Vino naranja</span><span class="lider"></span><span class="precio">$150</span></div>
+        <div class="fila"><span class="nom">Vino espumoso</span><span class="lider"></span><span class="precio">$150</span></div>
+        <div class="fila"><span class="nom">Lata de espumoso<span class="desc">rosado o blanco</span></span><span class="lider"></span><span class="precio">$120</span></div>
+      </div>
+
+      <div class="cocteles-cols">
+        <div>
+          <h3 style="font-family:var(--display);font-size:1.5rem;color:var(--salvia);margin:0 0 0.4rem;letter-spacing:0.02em">Floats de la casa</h3>
+          <div class="lista" style="margin-top:0">
+            <div class="fila"><span class="nom">Rose float</span><span class="lider"></span><span class="precio">$160</span></div>
+            <div class="fila"><span class="nom">Espumoso float</span><span class="lider"></span><span class="precio">$170</span></div>
+            <div class="fila"><span class="nom">Negroni float</span><span class="lider"></span><span class="precio">$220</span></div>
+            <div class="fila"><span class="nom">Carajillo affogato</span><span class="lider"></span><span class="precio">$170</span></div>
+            <div class="fila"><span class="nom">Affogato tiramisú</span><span class="lider"></span><span class="precio">$120</span></div>
+            <div class="fila"><span class="nom">Tinto de verano</span><span class="lider"></span><span class="precio">$150</span></div>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-family:var(--display);font-size:1.5rem;color:var(--salvia);margin:0 0 0.4rem;letter-spacing:0.02em">Cócteles</h3>
+          <div class="lista" style="margin-top:0">
+            <div class="fila"><span class="nom">Negroni lemi</span><span class="lider"></span><span class="precio">$160</span></div>
+            <div class="fila"><span class="nom">Negroni mexa</span><span class="lider"></span><span class="precio">$170</span></div>
+            <div class="fila"><span class="nom">Vermut de la casa</span><span class="lider"></span><span class="precio">$140</span></div>
+            <div class="fila"><span class="nom">Hugo spritz</span><span class="lider"></span><span class="precio">$210</span></div>
+            <div class="fila"><span class="nom">Aperol spritz</span><span class="lider"></span><span class="precio">$180</span></div>
+            <div class="fila"><span class="nom">Sbagliato</span><span class="lider"></span><span class="precio">$180</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="visita">
-  <h2 class="titulo rev">Pasa por una copa, quédate <i>por el helado</i></h2>
-  <div class="visita-datos rev" style="--d: 100ms">
-    <div>Horario<b>mié a dom, 7:30 pm</b></div>
+<p class="precio-nota">Precios en pesos. Carta completa disponible en el local.</p>
+
+<section class="visita" id="visita">
+  <p class="kicker rev">Visítanos</p>
+  <h2 class="titulo rev" style="--d:60ms">Pasa por una copa, quédate <span class="ac">por el helado</span></h2>
+  <div class="visita-datos rev" style="--d:120ms">
+    <div>Horario<b>Mié a dom, 7:30 pm</b></div>
     <div>Dónde<b>Talavera</b></div>
     <div>Redes<b>@lemiheladoyvino</b></div>
   </div>
-  <a class="btn rev" style="--d: 200ms" href="https://instagram.com/lemiheladoyvino" target="_blank" rel="noopener">Síguenos en Instagram</a>
+  <a class="btn rev" style="--d:200ms" href="https://instagram.com/lemiheladoyvino" target="_blank" rel="noopener">Síguenos en Instagram</a>
 </section>
 
 <footer>
@@ -409,10 +389,8 @@
 
 <script>
   const io = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); }
-    }
-  }, { threshold: 0.18 });
+    for (const e of entries) { if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); } }
+  }, { threshold: 0.15 });
   document.querySelectorAll('.rev:not(.visto)').forEach(el => io.observe(el));
 </script>
 
