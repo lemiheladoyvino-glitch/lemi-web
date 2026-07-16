@@ -64,12 +64,13 @@
     background: linear-gradient(rgba(22, 19, 14, 0.85), transparent);
   }
   .n-logo {
-    font-family: var(--logo);
-    font-weight: 600;
-    font-size: 1.4rem;
-    letter-spacing: 0.1em;
-    color: var(--crema);
-    text-decoration: none;
+    display: block;
+    line-height: 0;
+  }
+  .n-logo img {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
   }
   .n-links { display: flex; gap: 2rem; }
   .n-links a {
@@ -94,6 +95,12 @@
     flex-direction: column;
     justify-content: center;
     padding: clamp(5rem, 12vh, 8rem) clamp(1.5rem, 5vw, 5rem) clamp(3rem, 8vh, 5rem);
+  }
+  .hero-sello {
+    width: clamp(88px, 12vw, 128px);
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 1.6rem;
   }
   .hero-texto .marca {
     font-family: var(--logo);
@@ -312,7 +319,7 @@
 <body>
 
 <nav>
-  <a class="n-logo" href="#">LEMI</a>
+  <a class="n-logo" href="#" aria-label="LEMI, helado y vino"><img src="img/logo.svg" alt="LEMI" /></a>
   <div class="n-links">
     <a href="#mesa">La mesa</a>
     <a href="#helado">El helado</a>
@@ -323,7 +330,8 @@
 
 <header class="hero">
   <div class="hero-texto">
-    <h1 class="marca rev visto">LEMI</h1>
+    <img class="hero-sello rev visto" src="img/logo.svg" alt="" aria-hidden="true" />
+    <h1 class="marca rev visto" style="--d: 60ms">LEMI</h1>
     <p class="lema rev visto" style="--d: 120ms">abre de noche, cierra con helado</p>
     <div class="datos rev visto" style="--d: 240ms">
       <span>Helado y vino · Talavera</span>
