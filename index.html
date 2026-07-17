@@ -8,17 +8,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet" />
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet" />
 
 <style>
-  @font-face {
-    font-family: "Genty";
-    src: url("fonts/Genty.otf?v=8") format("opentype"),
-         url("fonts/Genty.ttf?v=8") format("truetype");
-    font-weight: 400;
-    font-display: swap;
-  }
-
   :root {
     --noche: #16130e;
     --noche-2: #1e1a13;
@@ -26,9 +19,10 @@
     --crema-suave: rgba(236, 227, 208, 0.62);
     --salvia: #a8b08f;
     --ambar: #c99a4e;
-    --serif: "Cormorant Garamond", serif;
-    --sans: "Archivo", sans-serif;
-    --display: "Genty", "Archivo", sans-serif;
+    --serif: "Fraunces", serif;
+    --sans: "Cabinet Grotesk", "Archivo", sans-serif;
+    --display: "Fraunces", serif;
+    --hand: "Caveat", cursive;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -109,12 +103,12 @@
   }
   .hero-texto .marca { width: clamp(220px, 32vw, 360px); height: auto; }
   .hero-texto .lema {
-    font-family: var(--display);
-    font-size: clamp(2rem, 4.4vw, 3.2rem);
+    font-family: var(--hand);
+    font-weight: 600;
+    font-size: clamp(2.6rem, 5.6vw, 4.4rem);
     color: var(--crema);
-    margin-top: 1.8rem;
-    line-height: 1.02;
-    letter-spacing: 0.01em;
+    margin-top: 1.4rem;
+    line-height: 0.98;
     max-width: 15ch;
   }
   .hero-texto .lema .ac { color: var(--salvia); }
@@ -139,10 +133,10 @@
   section { padding: clamp(4rem, 11vh, 8rem) clamp(1.2rem, 4vw, 3.5rem); }
   .titulo {
     font-family: var(--display);
-    font-weight: 400;
+    font-weight: 500;
     font-size: clamp(2.3rem, 5.6vw, 4.2rem);
-    line-height: 1.02;
-    letter-spacing: 0.01em;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
     max-width: 16ch;
   }
   .titulo .ac { color: var(--salvia); }
@@ -268,12 +262,13 @@
   }
   .promo figcaption b {
     display: block;
-    font-family: var(--display);
+    font-family: var(--hand);
+    font-weight: 700;
     font-style: normal;
-    font-size: 1.35rem;
-    letter-spacing: 0.02em;
+    font-size: 1.7rem;
+    line-height: 1;
     color: var(--salvia);
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.15rem;
   }
 
   /* visita */
@@ -308,8 +303,8 @@
   .visita-info { display: grid; gap: 1.6rem; }
   .visita-info span { display: block; margin-bottom: 0.25rem; }
   .visita-info b {
-    font-family: var(--serif); font-style: italic; font-weight: 400;
-    font-size: 1.4rem; color: var(--salvia);
+    font-family: var(--hand); font-weight: 600;
+    font-size: 1.7rem; color: var(--salvia);
   }
   .visita-info a { color: var(--salvia); text-decoration: none; }
   .visita-info a:hover { color: var(--crema); }
@@ -453,13 +448,13 @@
   <p class="intro rev" style="--d: 100ms">La semana entera con algo especial. Del carajillo del lunes al marianito del domingo.</p>
 
   <div class="promos-fila rev" style="--d: 120ms">
-    <figure class="promo"><div class="foto"><img src="img/promos/lunes.jpg?v=8" alt="Lunes: carajillo $70" loading="lazy" /></div><figcaption>Carajillo · $70</figcaption></figure>
-    <figure class="promo"><div class="foto"><img src="img/promos/martes.jpg?v=8" alt="Martes: tinto de verano $100" loading="lazy" /></div><figcaption>Tinto de verano · $100</figcaption></figure>
-    <figure class="promo"><div class="foto"><img src="img/promos/miercoles.jpg?v=8" alt="Miércoles: 2x1 en vino de la casa" loading="lazy" /></div><figcaption>2x1 en vino de la casa</figcaption></figure>
-    <figure class="promo"><div class="foto"><img src="img/promos/jueves.jpg?v=8" alt="Jueves: vermut $90" loading="lazy" /></div><figcaption>Vermut · $90</figcaption></figure>
-    <figure class="promo"><div class="foto"><img src="img/promos/viernes.jpg?v=8" alt="Viernes: negroni $100" loading="lazy" /></div><figcaption>Negroni · $100</figcaption></figure>
-    <figure class="promo"><div class="foto"><img src="img/promos/sabado.jpg?v=8" alt="Sábado: hugo spritz $150" loading="lazy" /></div><figcaption>Hugo Spritz · $150</figcaption></figure>
-    <figure class="promo"><div class="foto"><img src="img/promos/domingo.jpg?v=8" alt="Domingo: marianito $100" loading="lazy" /></div><figcaption>Marianito · $100</figcaption></figure>
+    <figure class="promo"><div class="foto"><img src="img/promos/lunes.jpg?v=8" alt="Lunes: carajillo $70" loading="lazy" /></div><figcaption><b>Lunes</b>Carajillo · $70</figcaption></figure>
+    <figure class="promo"><div class="foto"><img src="img/promos/martes.jpg?v=8" alt="Martes: tinto de verano $100" loading="lazy" /></div><figcaption><b>Martes</b>Tinto de verano · $100</figcaption></figure>
+    <figure class="promo"><div class="foto"><img src="img/promos/miercoles.jpg?v=8" alt="Miércoles: 2x1 en vino de la casa" loading="lazy" /></div><figcaption><b>Miércoles</b>2x1 en vino de la casa</figcaption></figure>
+    <figure class="promo"><div class="foto"><img src="img/promos/jueves.jpg?v=8" alt="Jueves: vermut $90" loading="lazy" /></div><figcaption><b>Jueves</b>Vermut · $90</figcaption></figure>
+    <figure class="promo"><div class="foto"><img src="img/promos/viernes.jpg?v=8" alt="Viernes: negroni $100" loading="lazy" /></div><figcaption><b>Viernes</b>Negroni · $100</figcaption></figure>
+    <figure class="promo"><div class="foto"><img src="img/promos/sabado.jpg?v=8" alt="Sábado: hugo spritz $150" loading="lazy" /></div><figcaption><b>Sábado</b>Hugo Spritz · $150</figcaption></figure>
+    <figure class="promo"><div class="foto"><img src="img/promos/domingo.jpg?v=8" alt="Domingo: marianito $100" loading="lazy" /></div><figcaption><b>Domingo</b>Marianito · $100</figcaption></figure>
   </div>
 </section>
 
