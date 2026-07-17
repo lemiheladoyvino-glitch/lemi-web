@@ -493,13 +493,17 @@
   }, { threshold: 0.18 });
   document.querySelectorAll('.rev:not(.visto)').forEach(el => io.observe(el));
 
-  // logo del nav: aparece al pasar el logo grande del hero, se desliza de vuelta al subir
+  // logo del nav: oculto al inicio; aparece SOLO cuando el logo grande sale por arriba al escrolear
   const navLogo = document.querySelector('.n-logo');
   const marcaGrande = document.querySelector('.hero-texto .marca');
   if (navLogo && marcaGrande) {
-    new IntersectionObserver(([entry]) => {
-      navLogo.classList.toggle('show', !entry.isIntersecting);
-    }, { threshold: 0 }).observe(marcaGrande);
+    const actualizar = () => {
+      // mostrar solo si el logo grande ya se fue por encima del borde superior
+      navLogo.classList.toggle('show', marcaGrande.getBoundingClientRect().bottom < 56);
+    };
+    actualizar();
+    window.addEventListener('scroll', actualizar, { passive: true });
+    window.addEventListener('resize', actualizar, { passive: true });
   }
 </script>
 
