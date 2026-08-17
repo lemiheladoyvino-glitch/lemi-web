@@ -271,6 +271,58 @@
     margin-bottom: 0.15rem;
   }
 
+  /* galería */
+  .galeria-grid {
+    margin-top: clamp(0.6rem, 1.6vw, 1rem);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.6rem, 1.6vw, 1rem);
+  }
+  .galeria-grid .foto { border-radius: 6px; aspect-ratio: 3 / 4; }
+  .galeria-portada {
+    display: block;
+    position: relative;
+    margin-top: 3rem;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    aspect-ratio: 16 / 10;
+  }
+  .galeria-portada .foto { position: absolute; inset: 0; border-radius: 8px; }
+  .galeria-portada::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(22,19,14,0.85), rgba(22,19,14,0.15) 55%, rgba(22,19,14,0.35));
+    transition: background 300ms ease-out;
+  }
+  .galeria-portada:hover::after { background: linear-gradient(to top, rgba(22,19,14,0.8), rgba(22,19,14,0.1) 55%, rgba(22,19,14,0.25)); }
+  .gp-overlay {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 2;
+    padding: clamp(1.4rem, 4vw, 2.6rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.1rem;
+  }
+  .gp-hand {
+    font-family: var(--hand);
+    font-weight: 700;
+    font-size: clamp(2rem, 5.5vw, 3.4rem);
+    color: var(--crema);
+    line-height: 1;
+  }
+  .gp-user {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    letter-spacing: 0.06em;
+    color: var(--salvia);
+  }
+  @media (max-width: 640px) { .galeria-portada { aspect-ratio: 3 / 4; } }
+
   /* visita */
   .visita {
     text-align: center;
@@ -354,6 +406,7 @@
     .vinos-grid .v-2 { margin-bottom: 0; }
     .visita-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
     .horario li { min-width: 15em; }
+    .galeria-grid { grid-template-columns: repeat(2, 1fr); }
     .n-links a:not(:last-child) { display: none; }
   }
 </style>
@@ -367,6 +420,7 @@
     <a href="#helado">El helado</a>
     <a href="#vinos">Los vinos</a>
     <a href="#promos">Promos</a>
+    <a href="#galeria">Galería</a>
     <a href="https://instagram.com/lemiheladoyvino" target="_blank" rel="noopener">Instagram</a>
   </div>
 </nav>
@@ -456,6 +510,19 @@
     <figure class="promo"><div class="foto"><img src="img/promos/sabado.jpg?v=9" alt="Sábado: hugo spritz $150" loading="lazy" /></div><figcaption><b>Sábado</b>Hugo Spritz · $150</figcaption></figure>
     <figure class="promo"><div class="foto"><img src="img/promos/domingo.jpg?v=9" alt="Domingo: marianito $100" loading="lazy" /></div><figcaption><b>Domingo</b>Marianito · $100</figcaption></figure>
   </div>
+</section>
+
+<section id="galeria">
+  <h2 class="titulo rev">Galería <span class="ac">LEMI</span></h2>
+  <p class="intro rev" style="--d: 100ms">Momentos, copas y noches en la barra.</p>
+
+  <a class="galeria-portada rev" style="--d: 160ms" href="galeria.html">
+    <div class="foto"><img src="img/galeria/portada.jpg?v=9" alt="Amigos afuera de LEMI, de noche" loading="lazy" /></div>
+    <div class="gp-overlay">
+      <span class="gp-hand">Entra a la galería</span>
+      <span class="gp-user">Ver todas las fotos →</span>
+    </div>
+  </a>
 </section>
 
 <section class="visita" id="visita">

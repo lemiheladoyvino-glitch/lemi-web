@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Galería — LEMI</title>
+<meta name="description" content="Galería LEMI. Momentos, copas y noches en la barra." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet" />
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --noche: #16130e;
+    --noche-2: #1e1a13;
+    --crema: #ece3d0;
+    --crema-suave: rgba(236, 227, 208, 0.62);
+    --salvia: #a8b08f;
+    --ambar: #c99a4e;
+    --sans: "Cabinet Grotesk", "Archivo", sans-serif;
+    --display: "Fraunces", serif;
+    --hand: "Caveat", cursive;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--noche); color: var(--crema);
+    font-family: var(--sans); font-weight: 300; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--salvia); color: var(--noche); }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .rev { opacity: 0; transform: translateY(24px);
+      transition: opacity 700ms cubic-bezier(0.16,1,0.3,1), transform 700ms cubic-bezier(0.16,1,0.3,1);
+      transition-delay: var(--d, 0ms); }
+    .rev.visto { opacity: 1; transform: translateY(0); }
+    .foto { overflow: hidden; }
+    .foto img { transition: transform 700ms cubic-bezier(0.16,1,0.3,1); }
+    .foto:hover img { transform: scale(1.03); }
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem clamp(1.2rem, 4vw, 3.5rem);
+    background: linear-gradient(var(--noche) 60%, transparent);
+  }
+  .volver {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--crema-suave); text-decoration: none;
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: color 200ms ease-out;
+  }
+  .volver:hover { color: var(--crema); }
+  nav .marca { height: 26px; width: auto; }
+
+  header {
+    padding: clamp(2rem, 6vh, 4rem) clamp(1.2rem, 4vw, 3.5rem) clamp(1.5rem, 4vh, 2.5rem);
+    text-align: center;
+  }
+  header h1 {
+    font-family: var(--display); font-weight: 500;
+    font-size: clamp(2.6rem, 8vw, 5rem); line-height: 1; letter-spacing: -0.01em;
+  }
+  header h1 .ac { color: var(--salvia); }
+  header p {
+    margin-top: 0.8rem; color: var(--crema-suave);
+    font-family: var(--hand); font-size: clamp(1.4rem, 3vw, 1.9rem); color: var(--salvia);
+  }
+
+  .grid {
+    columns: 3 260px;
+    column-gap: clamp(0.7rem, 1.8vw, 1.1rem);
+    padding: 0 clamp(1.2rem, 4vw, 3.5rem) clamp(3rem, 8vh, 6rem);
+    max-width: 1200px; margin: 0 auto;
+  }
+  .grid figure {
+    break-inside: avoid;
+    margin-bottom: clamp(0.7rem, 1.8vw, 1.1rem);
+    border-radius: 6px; overflow: hidden;
+  }
+  .grid figure img { border-radius: 6px; height: auto; }
+
+  .cierre {
+    text-align: center;
+    padding: 0 clamp(1.2rem, 4vw, 3.5rem) clamp(4rem, 10vh, 7rem);
+  }
+  .cierre .hand { font-family: var(--hand); font-weight: 700; font-size: clamp(2rem, 6vw, 3.4rem); color: var(--crema); line-height: 1; display: block; }
+  .cierre a {
+    display: inline-block; margin-top: 1.4rem;
+    font-weight: 500; font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--noche); background: var(--crema); text-decoration: none;
+    padding: 0.9rem 2.2rem; border-radius: 999px;
+    transition: transform 150ms ease-out, background 150ms ease-out;
+  }
+  .cierre a:hover { background: var(--salvia); }
+  .cierre a:active { transform: scale(0.97); }
+
+  footer {
+    border-top: 1px solid rgba(236,227,208,0.14);
+    padding: 1.6rem clamp(1.2rem, 4vw, 3.5rem);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.6rem;
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--crema-suave);
+  }
+  footer a { color: var(--salvia); text-decoration: none; }
+  footer a:hover { color: var(--crema); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="volver" href="index.html">← Volver</a>
+  <a href="index.html"><img class="marca" src="img/wordmark-crema.png?v=9" alt="LEMI" /></a>
+</nav>
+
+<header>
+  <h1 class="rev visto">Galería <span class="ac">LEMI</span></h1>
+  <p class="rev visto" style="--d: 100ms">Momentos, copas y noches en la barra</p>
+</header>
+
+<div class="grid">
+  <figure class="foto rev"><img src="img/galeria/portada.jpg?v=9" alt="Amigos afuera de LEMI, de noche" loading="lazy" /></figure>
+  <figure class="foto rev" style="--d: 60ms"><img src="img/galeria/g1.jpg?v=9" alt="Noche de charcutería y vino en LEMI" loading="lazy" /></figure>
+  <figure class="foto rev" style="--d: 120ms"><img src="img/galeria/g4.jpg?v=9" alt="Afuera de LEMI" loading="lazy" /></figure>
+  <figure class="foto rev" style="--d: 60ms"><img src="img/galeria/g3.jpg?v=9" alt="Tarde en LEMI junto a la ventana" loading="lazy" /></figure>
+  <figure class="foto rev" style="--d: 120ms"><img src="img/galeria/g2.jpg?v=9" alt="La barra de LEMI" loading="lazy" /></figure>
+</div>
+
+<div class="cierre">
+  <span class="hand rev">Etiquétanos en Instagram</span>
+  <a class="rev" style="--d: 100ms" href="https://instagram.com/lemiheladoyvino" target="_blank" rel="noopener">@lemiheladoyvino</a>
+</div>
+
+<footer>
+  <span>LEMI · Helado y vino</span>
+  <a href="https://instagram.com/lemiheladoyvino" target="_blank" rel="noopener">@lemiheladoyvino</a>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) { if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); } }
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rev:not(.visto)').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
